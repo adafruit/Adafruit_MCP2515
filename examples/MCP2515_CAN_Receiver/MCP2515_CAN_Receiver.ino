@@ -4,19 +4,34 @@
 
 #include <Adafruit_MCP2515.h>
 
-// Set pin attached to CS
-#define CS_PIN 5
+//
+// Comment/uncomment chip select (CS) pin for Feather used
+//
+// Feather M0, M4, ESP32-S2, ESP32-S3
+#define CS_PIN (5)
+// Feather RP2040
+// #define CS_PIN (7)
+// Feather ESP32 V1 and V2
+// #define CS_PIN (14)
+// Feather ESP8266
+// #define CS_PIN (2)
+
+// Set CAN bus baud rate
+#define CAN_BAUDRATE (500000)
 
 Adafruit_MCP2515 mcp(CS_PIN);
 
 void setup() {
-  Serial.begin(9600);
-  while(!Serial);
+  Serial.begin(115200);
+  while(!Serial) delay(10);
 
-  if (!mcp.begin()) {
+  Serial.println("MCP2515 Receiver test!");
+
+  if (!mcp.begin(CAN_BAUDRATE)) {
     Serial.println("Error initializing MCP2515.");
-    while(1);
+    while(1) delay(10);
   }
+  Serial.println("MCP2515 chip found");
 }
 
 void loop() {

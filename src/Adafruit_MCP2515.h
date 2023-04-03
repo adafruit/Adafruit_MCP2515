@@ -18,7 +18,7 @@ public:
   Adafruit_MCP2515(int8_t cspin, int8_t mosipin, int8_t misopin, int8_t sckpin);
   virtual ~Adafruit_MCP2515();
 
-  virtual int begin(long baudRate=1e6);
+  virtual int begin(long baudRate);
   virtual void end();
 
   virtual int endPacket();
