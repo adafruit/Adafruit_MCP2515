@@ -29,7 +29,7 @@
 // #define INT_PIN (16)
 
 // Set CAN bus baud rate
-#define CAN_BAUDRATE (500000)
+#define CAN_BAUDRATE (250000)
 
 
 Adafruit_MCP2515 mcp(CS_PIN);
