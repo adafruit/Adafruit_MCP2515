@@ -268,7 +268,7 @@ void Adafruit_MCP2515::onReceive(int intPin, void(*callback)(int))
   pinMode(intPin, INPUT);
 
   if (callback) {
-#ifndef ESP8266
+#if !defined ESP8266 && !defined ESP32
     SPI.usingInterrupt(digitalPinToInterrupt(intPin));
 #endif
     attachInterrupt(digitalPinToInterrupt(intPin), Adafruit_MCP2515::onInterrupt, LOW);
