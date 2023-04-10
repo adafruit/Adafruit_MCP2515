@@ -1,13 +1,14 @@
 // Adapted for use with Adafruit_BusIO.
 // Modified from original `MCP2515Class` class code:
 // Copyright (c) Sandeep Mistry. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full
+// license information.
 
 #ifndef __ADAFRUIT_MCP2515_H__
 #define __ADAFRUIT_MCP2515_H__
 
-#include <CANController.h>
 #include <Adafruit_SPIDevice.h>
+#include <CANController.h>
 
 #define MCP2515_DEFAULT_CLOCK_FREQUENCY 16e6
 
@@ -25,7 +26,7 @@ public:
 
   virtual int parsePacket();
 
-  virtual void onReceive(int intPin, void(*callback)(int));
+  virtual void onReceive(int intPin, void (*callback)(int));
 
   using CANControllerClass::filter;
   virtual int filter(int id, int mask);
@@ -39,7 +40,7 @@ public:
 
   void setClockFrequency(long clockFrequency);
 
-  void dumpRegisters(Stream& out);
+  void dumpRegisters(Stream &out);
 
 private:
   void reset();
