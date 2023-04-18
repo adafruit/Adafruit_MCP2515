@@ -4,17 +4,24 @@
 
 #include <Adafruit_MCP2515.h>
 
-//
-// Comment/uncomment chip select (CS) pin for Feather used
-//
-// Feather M0, M4, ESP32-S2, ESP32-S3
-#define CS_PIN (5)
-// Feather RP2040
-// #define CS_PIN (7)
-// Feather ESP32 V1 and V2
-// #define CS_PIN (14)
-// Feather ESP8266
-// #define CS_PIN (2)
+#ifdef ESP8266
+   #define CS_PIN    2
+#elif defined(ESP32) && !defined(ARDUINO_ADAFRUIT_FEATHER_ESP32S2) && !defined(ARDUINO_ADAFRUIT_FEATHER_ESP32S3)
+   #define CS_PIN    14
+#elif defined(TEENSYDUINO)
+   #define CS_PIN    8
+#elif defined(ARDUINO_STM32_FEATHER)
+   #define CS_PIN    PC5
+#elif defined(ARDUINO_NRF52832_FEATHER)  /* BSP 0.6.5 and higher! */
+   #define CS_PIN    27
+#elif defined(ARDUINO_MAX32620FTHR) || defined(ARDUINO_MAX32630FTHR)
+   #define CS_PIN    P3_2
+#elif defined(ARDUINO_ADAFRUIT_FEATHER_RP2040)
+   #define CS_PIN    7
+#else
+    // Anything else, defaults!
+   #define CS_PIN    5
+#endif
 
 // Set CAN bus baud rate
 #define CAN_BAUDRATE (250000)
