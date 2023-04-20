@@ -4,23 +4,62 @@
 
 #include <Adafruit_MCP2515.h>
 
-// Set pin attached to CS
-#define CS_PIN 5
-// Set pin attached to INT
-#define INT_PIN 6
+#ifdef ESP8266
+   #define CS_PIN    2
+   #define INT_PIN   16
+#elif defined(ESP32) && !defined(ARDUINO_ADAFRUIT_FEATHER_ESP32S2) && !defined(ARDUINO_ADAFRUIT_FEATHER_ESP32S3)
+   #define CS_PIN    14
+   #define INT_PIN   32
+#elif defined(TEENSYDUINO)
+   #define CS_PIN    8
+   #define INT_PIN   3
+#elif defined(ARDUINO_STM32_FEATHER)
+   #define CS_PIN    PC5
+   #define INT_PIN   PC7
+#elif defined(ARDUINO_NRF52832_FEATHER)  /* BSP 0.6.5 and higher! */
+   #define CS_PIN    27
+   #define INT_PIN   30
+#elif defined(ARDUINO_MAX32620FTHR) || defined(ARDUINO_MAX32630FTHR)
+   #define CS_PIN    P3_2
+   #define INT_PIN   P3_3
+#elif defined(ARDUINO_ADAFRUIT_FEATHER_RP2040)
+   #define CS_PIN    7
+   #define INT_PIN   8
+#else
+    // Anything else, defaults!
+   #define CS_PIN    5
+   #define INT_PIN   6
+#endif
+
+//
+// Comment/uncomment interrupt (INT) pin for Feather used
+//
+// Feather M0, M4, ESP32-S2, ESP32-S3
+#define INT_PIN (6)
+// Feather RP2040
+// #define INT_PIN (8)
+// Feather ESP32 V1 and V2
+// #define INT_PIN (32)
+// Feather ESP8266
+// #define INT_PIN (16)
+
+// Set CAN bus baud rate
+#define CAN_BAUDRATE (250000)
+
 
 Adafruit_MCP2515 mcp(CS_PIN);
 
 void setup() {
-  Serial.begin(9600);
-  while (!Serial);
+  Serial.begin(115200);
+  while(!Serial) delay(10);
 
-  Serial.println("CAN Receiver Callback");
+  Serial.println("MCP2515 Receiver Callback test!");
 
-  if (!mcp.begin()) {
-    Serial.println("Starting CAN failed!");
-    while (1);
+  if (!mcp.begin(CAN_BAUDRATE)) {
+    Serial.println("Error initializing MCP2515.");
+    while(1) delay(10);
   }
+  Serial.println("MCP2515 chip found");
 
   // register the receive callback
   mcp.onReceive(INT_PIN, onReceive);
