@@ -34,18 +34,6 @@
    #define INT_PIN   6
 #endif
 
-//
-// Comment/uncomment interrupt (INT) pin for Feather used
-//
-// Feather M0, M4, ESP32-S2, ESP32-S3
-// #define INT_PIN (6)
-// Feather RP2040
-// #define INT_PIN (8)
-// Feather ESP32 V1 and V2
-// #define INT_PIN (32)
-// Feather ESP8266
-// #define INT_PIN (16)
-
 // Set CAN bus baud rate
 #define CAN_BAUDRATE (250000)
 
