@@ -25,6 +25,9 @@
 #elif defined(ARDUINO_ADAFRUIT_FEATHER_RP2040)
    #define CS_PIN    7
    #define INT_PIN   8
+#elif defined(ARDUINO_RASPBERRY_PI_PICO) // PiCowbell CAN Bus
+   #define CS_PIN    20
+   #define INT_PIN   21
 #else
     // Anything else, defaults!
    #define CS_PIN    5
