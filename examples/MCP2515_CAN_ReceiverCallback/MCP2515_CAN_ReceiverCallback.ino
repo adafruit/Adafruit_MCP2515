@@ -25,7 +25,7 @@
 #elif defined(ARDUINO_ADAFRUIT_FEATHER_RP2040)
    #define CS_PIN    7
    #define INT_PIN   8
-#elif defined(ARDUINO_RASPBERRY_PI_PICO) // PiCowbell CAN Bus
+#elif defined(ARDUINO_RASPBERRY_PI_PICO) || defined(ARDUINO_RASPBERRY_PI_PICO_W) // PiCowbell CAN Bus
    #define CS_PIN    20
    #define INT_PIN   21
 #else
@@ -38,7 +38,7 @@
 // Comment/uncomment interrupt (INT) pin for Feather used
 //
 // Feather M0, M4, ESP32-S2, ESP32-S3
-#define INT_PIN (6)
+// #define INT_PIN (6)
 // Feather RP2040
 // #define INT_PIN (8)
 // Feather ESP32 V1 and V2
@@ -104,5 +104,3 @@ void onReceive(int packetSize) {
 
   Serial.println();
 }
-
-
